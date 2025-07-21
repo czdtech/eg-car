@@ -10,14 +10,9 @@ const GamePlayer = () => {
 
   // Load game for the first time
   const loadGame = () => {
-    if (!isGameLoaded && !isGameLoading) {
-      setIsGameLoading(true);
+    if (!isGameLoaded) {
       setIsGameLoaded(true);
-
-      // 模拟加载延迟
-      setTimeout(() => {
-        setIsGameLoading(false);
-      }, 1500);
+      setIsGameLoading(false);
     }
   };
 
@@ -131,32 +126,32 @@ const GamePlayer = () => {
               />
             ) : (
               /* Game Preview with Play Button */
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 flex items-center justify-center">
-                <div className="text-center space-y-6">
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 flex items-center justify-center"
+                style={{
+                  backgroundImage: 'url(/images/games/eggy-car.jpg)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat'
+                }}
+              >
+                {/* Dark overlay for better text readability */}
+                <div className="absolute inset-0 bg-black/60"></div>
+                <div className="relative z-10 text-center space-y-6">
 
                   {/* Game Title */}
                   <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Eggy Car Unblocked</h3>
-                    <p className="text-gray-400 text-sm">Drive carefully and keep your egg safe!</p>
+                    <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">Eggy Car Unblocked</h3>
+                    <p className="text-gray-200 text-sm drop-shadow-md">Drive carefully and keep your egg safe!</p>
                   </div>
 
                   {/* Play Button */}
                   <button
                     onClick={loadGame}
-                    className="group flex items-center space-x-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25"
-                    disabled={isGameLoading}
+                    className="group flex items-center justify-center space-x-3 px-8 py-4 bg-blue-600/90 hover:bg-blue-500/90 backdrop-blur-sm rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25 start-game-glow hover:animate-none mx-auto"
                   >
-                    {isGameLoading ? (
-                      <>
-                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span className="text-lg font-semibold">Loading...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                        <span className="text-lg font-semibold">Start Game</span>
-                      </>
-                    )}
+                    <Play className="w-6 h-6 group-hover:scale-110 transition-transform start-game-bounce" />
+                    <span className="text-lg font-semibold">Start Game</span>
                   </button>
 
 
