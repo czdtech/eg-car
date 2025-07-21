@@ -63,7 +63,7 @@ const GamePlayer = () => {
           <div className="flex-1 w-full h-full">
             {isGameLoaded ? (
               <iframe
-                src="https://ubg98.github.io/EggyCar/"
+                src="/embed/eggycar/index.html"
                 className="w-full h-full border-none"
                 allowFullScreen
                 title="Eggy Car Unblocked Game"
@@ -119,7 +119,7 @@ const GamePlayer = () => {
             {isGameLoaded ? (
               <iframe
                 id="main-game-iframe"
-                src="https://ubg98.github.io/EggyCar/"
+                src="/embed/eggycar/index.html"
                 className="responsive-iframe"
                 allowFullScreen
                 title="Eggy Car Unblocked Game"

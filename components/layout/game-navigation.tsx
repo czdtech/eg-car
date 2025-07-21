@@ -6,18 +6,23 @@ import { Play, Search, Menu, X } from 'lucide-react';
 const GameNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('game-section');
+  const [currentPath, setCurrentPath] = useState('/');
 
   const navigationItems = [
-    { href: '#game-section', label: 'Play Game', id: 'game-section' },
-    { href: '#game-features', label: 'Features', id: 'game-features' },
-    { href: '#game-tips', label: 'Tips & Tricks', id: 'game-tips' },
-    { href: '#controls-guide', label: 'Controls', id: 'controls-guide' },
-    { href: '#faq', label: 'FAQ', id: 'faq' }
+    { href: '/', label: 'Eggy Car', id: 'home', type: 'page' },
+    { href: '#game-features', label: 'Features', id: 'game-features', type: 'anchor' },
+    { href: '#game-tips', label: 'Tips & Tricks', id: 'game-tips', type: 'anchor' },
+    { href: '#controls-guide', label: 'Controls', id: 'controls-guide', type: 'anchor' },
+    { href: '#faq', label: 'FAQ', id: 'faq', type: 'anchor' },
+    { href: '/about', label: 'About', id: 'about', type: 'page' }
     // { href: '#games-grid', label: 'More Games', id: 'games-grid' }
   ];
 
-  // Track active section based on scroll position
+  // Track current path and active section
   useEffect(() => {
+    // Update current path
+    setCurrentPath(window.location.pathname);
+
     const observerOptions = {
       root: null,
       rootMargin: '-20% 0px -70% 0px',
@@ -34,26 +39,43 @@ const GameNavigation = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all sections
+    // Observe all sections (only anchor type items)
     navigationItems.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (element) {
-        observer.observe(element);
+      if (item.type === 'anchor') {
+        const element = document.getElementById(item.id);
+        if (element) {
+          observer.observe(element);
+        }
       }
     });
 
     return () => observer.disconnect();
   }, []);
 
-  const handleNavClick = (href: string) => {
+  // Helper function to determine if a navigation item is active
+  const isItemActive = (item: any) => {
+    if (item.type === 'page') {
+      return currentPath === item.href;
+    } else {
+      return activeSection === item.id && currentPath === '/';
+    }
+  };
+
+  const handleNavClick = (href: string, type: string) => {
     setIsMenuOpen(false);
-    // Smooth scroll to section
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+
+    if (type === 'page') {
+      // Navigate to different page
+      window.location.href = href;
+    } else {
+      // Smooth scroll to section on current page
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
   };
 
@@ -76,15 +98,15 @@ const GameNavigation = () => {
             {navigationItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => handleNavClick(item.href)}
+                onClick={() => handleNavClick(item.href, item.type)}
                 className={`text-sm font-medium transition-all duration-300 hover:text-white relative py-2 px-3 rounded-lg ${
-                  activeSection === item.id
+                  isItemActive(item)
                     ? 'text-white bg-slate-800/50'
                     : 'text-gray-300 hover:bg-slate-800/30'
                 }`}
               >
                 {item.label}
-                {activeSection === item.id && (
+                {isItemActive(item) && (
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-blue-400 rounded-full translate-y-1"></div>
                 )}
               </button>
@@ -117,9 +139,9 @@ const GameNavigation = () => {
               {navigationItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={() => handleNavClick(item.href, item.type)}
                   className={`block w-full text-left py-3 px-4 rounded-lg transition-colors duration-200 ${
-                    activeSection === item.id
+                    isItemActive(item)
                       ? 'text-white bg-slate-800/50'
                       : 'text-gray-300 hover:text-white hover:bg-slate-800/30'
                   }`}

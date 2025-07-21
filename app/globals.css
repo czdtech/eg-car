@@ -618,6 +618,24 @@
   }
 }
 
+/* 全屏模式优化 */
+.fullscreen-container {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  padding-bottom: 0 !important;
+  z-index: 9999;
+  border-radius: 0 !important;
+  background-color: #000 !important;
+}
+
+.fullscreen-container .responsive-iframe {
+  background-color: #000;
+}
+
 /* Start Game 按钮动画效果 */
 @keyframes gentle-glow {
   0%, 100% {

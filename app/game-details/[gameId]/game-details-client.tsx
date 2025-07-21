@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { Play, Star, Users } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Play, Star, Users, Maximize, Minimize } from 'lucide-react';
 import Image from 'next/image';
 import GameNavigation from '@/components/layout/game-navigation';
 import GameFooter from '@/components/layout/game-footer';
@@ -20,6 +20,50 @@ interface GameDetailsClientProps {
 }
 
 export default function GameDetailsClient({ game, content }: GameDetailsClientProps) {
+  // 全屏状态管理
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+
+  // 处理全屏切换
+  const toggleFullscreen = () => {
+    if (!containerRef) return;
+
+    if (!isFullscreen) {
+      if (containerRef.requestFullscreen) {
+        containerRef.requestFullscreen();
+      } else if ((containerRef as any).webkitRequestFullscreen) {
+        (containerRef as any).webkitRequestFullscreen();
+      } else if ((containerRef as any).msRequestFullscreen) {
+        (containerRef as any).msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if ((document as any).webkitExitFullscreen) {
+        (document as any).webkitExitFullscreen();
+      } else if ((document as any).msExitFullscreen) {
+        (document as any).msExitFullscreen();
+      }
+    }
+  };
+
+  // 监听全屏状态变化
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('msfullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
   // Get recommended games (exclude current game and get 4 random games)
   const getRecommendedGames = (): Game[] => {
     const otherGames = featuredGames.filter(g => g.id !== game.id);
@@ -45,13 +89,29 @@ export default function GameDetailsClient({ game, content }: GameDetailsClientPr
       <main className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         {/* Game iframe embed */}
-        <div className="relative w-full bg-slate-800/50 border border-white/10 responsive-iframe-container">
+        <div
+          ref={setContainerRef}
+          className={`relative w-full bg-slate-800/50 border border-white/10 responsive-iframe-container ${isFullscreen ? 'fullscreen-container' : ''}`}
+        >
           <iframe
             src={content.embedPath}
             className="responsive-iframe"
             sandbox="allow-scripts allow-same-origin"
             title={game.title}
           />
+
+          {/* 全屏按钮 */}
+          <button
+            onClick={toggleFullscreen}
+            className="absolute bottom-4 right-4 bg-black/50 hover:bg-black/70 p-2 rounded-lg transition-all duration-200 backdrop-blur-sm z-10 group"
+            aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+          >
+            {isFullscreen ? (
+              <Minimize className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+            ) : (
+              <Maximize className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+            )}
+          </button>
         </div>
         
         {/* Game Title and Rating */}
