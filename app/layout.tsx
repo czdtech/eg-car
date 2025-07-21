@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Eggy Car Unblocked - Play Free Online Racing Game | Drive the Egg Safely',
+  title: 'Eggy Car Unblocked - Play Free Online Skill Game',
   description: 'Play Eggy Car Unblocked online for free! The ultimate unblocked driving game where you transport eggs safely through challenging terrain. No download required - play instantly in your browser.',
   keywords: 'Eggy Car Unblocked, unblocked games, racing game, physics game, free online games, browser games',
   authors: [{ name: 'Eggy Car Unblocked Portal' }],
