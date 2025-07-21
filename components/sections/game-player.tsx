@@ -159,17 +159,7 @@ const GamePlayer = () => {
                     )}
                   </button>
 
-                  {/* Game Stats */}
-                  <div className="flex items-center justify-center space-x-4 text-sm text-gray-400">
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span>4.8</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Users className="w-4 h-4" />
-                      <span>2.1M players</span>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             )}
