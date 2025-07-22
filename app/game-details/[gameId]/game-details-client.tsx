@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Star, Users, Maximize, Minimize } from 'lucide-react';
 import Image from 'next/image';
-import GameNavigation from '@/components/layout/game-navigation';
+import GameDetailsNavigation from '@/components/layout/game-details-navigation';
 import GameFooter from '@/components/layout/game-footer';
 import { featuredGames, type Game } from '@/lib/game-data';
 
@@ -83,7 +83,7 @@ export default function GameDetailsClient({ game, content }: GameDetailsClientPr
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {/* Navigation */}
-      <GameNavigation />
+      <GameDetailsNavigation />
 
       {/* Main Content */}
       <main className="pt-24 pb-16">
@@ -137,13 +137,13 @@ export default function GameDetailsClient({ game, content }: GameDetailsClientPr
         </section>
 
         {/* Gameplay Guide */}
-        <section>
+        <section id="how-to-play">
           <h2 className="text-2xl font-semibold mb-2">How to Play</h2>
           <div className="whitespace-pre-line text-gray-300">{content.guide}</div>
         </section>
 
         {/* FAQ */}
-        <section>
+        <section id="game-faq">
           <h2 className="text-2xl font-semibold mb-2">FAQ</h2>
           <div className="whitespace-pre-line text-gray-300">{content.faq}</div>
         </section>
