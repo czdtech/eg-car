@@ -1,0 +1,23 @@
+{
+  "name": "Eggy Car Unblocked - Play Free Online Skill Game",
+  "short_name": "Eggy Car",
+  "description": "Play Eggy Car Unblocked online for free! The ultimate unblocked driving game where you transport eggs safely through challenging terrain.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1e293b",
+  "background_color": "#0f172a",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "any"
+}
