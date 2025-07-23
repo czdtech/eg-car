@@ -1,8 +1,20 @@
-'use client';
-
+import { Metadata } from 'next';
 import { FileText } from 'lucide-react';
 import GameNavigation from '@/components/layout/game-navigation';
 import GameFooter from '@/components/layout/game-footer';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service - Eggy Car Unblocked Games',
+  description: 'Read our terms of service for using Eggy Car games platform. Understand your rights and responsibilities when playing our free HTML5 games.',
+  keywords: 'terms of service, game terms, eggy car games, user agreement, gaming terms',
+  authors: [{ name: 'Eggy Car Unblocked Portal' }],
+  robots: 'index, follow',
+  openGraph: {
+    title: 'Terms of Service - Eggy Car Unblocked Games',
+    description: 'Terms and conditions for using our free online games platform.',
+    type: 'website',
+  },
+};
 
 export default function TermsPage() {
   return (
@@ -105,7 +117,7 @@ export default function TermsPage() {
             <div className="bg-slate-800/30 rounded-lg p-6 border border-white/10">
               <h2 className="font-semibold text-2xl mb-4">7. Governing Law</h2>
               <p className="text-gray-400">
-                These Terms shall be governed by the laws of [Your Country/State] without regard to its conflict of law provisions.
+                These Terms shall be governed by the laws of the United States without regard to its conflict of law provisions.
               </p>
             </div>
 

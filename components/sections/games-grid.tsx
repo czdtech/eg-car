@@ -68,7 +68,7 @@ const GamesGrid = () => {
               >
                 <Image
                   src={game.image}
-                  alt={game.title}
+                  alt={`${game.title} - Free unblocked ${game.category.toLowerCase()} game - Play online now`}
                   fill
                   className="object-cover rounded-lg"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"

@@ -1,9 +1,21 @@
-'use client';
-
-import { ArrowLeft, Gamepad, Trophy, Users, Info } from 'lucide-react';
+import { Metadata } from 'next';
+import { Gamepad, Trophy, Users, Info } from 'lucide-react';
 import Link from 'next/link';
 import GameNavigation from '@/components/layout/game-navigation';
 import GameFooter from '@/components/layout/game-footer';
+
+export const metadata: Metadata = {
+  title: 'About Us - Eggy Car Unblocked Games Platform',
+  description: 'Learn about Eggy Car Games platform. We provide safe, free HTML5 games with no downloads required. Discover our mission and game collection.',
+  keywords: 'about eggy car, html5 games, free online games, unblocked games platform, game collection',
+  authors: [{ name: 'Eggy Car Unblocked Portal' }],
+  robots: 'index, follow',
+  openGraph: {
+    title: 'About Us - Eggy Car Unblocked Games Platform',
+    description: 'Learn about our free HTML5 games platform. Safe, no-download gaming experience for everyone.',
+    type: 'website',
+  },
+};
 
 export default function AboutPage() {
   return (

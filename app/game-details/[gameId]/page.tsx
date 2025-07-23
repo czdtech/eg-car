@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: { gameId: string } 
           url: game.image,
           width: 800,
           height: 600,
-          alt: `${game.title} - Free Online Game`,
+          alt: `${game.title} - Free Online ${game.category} Game`,
         },
       ],
     },
@@ -52,6 +52,39 @@ export async function generateMetadata({ params }: { params: { gameId: string } 
       description: gameDescription,
       images: [game.image],
     },
+  };
+}
+
+// Generate structured data for each game
+function generateGameStructuredData(game: Game, gameId: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://eggycar.com';
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": `${game.title} Unblocked`,
+    "description": game.description,
+    "genre": game.category,
+    "gamePlatform": ["Web Browser", "HTML5"],
+    "operatingSystem": ["Web Browser"],
+    "applicationSubCategory": "Browser Game",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Eggy Car Unblocked Portal"
+    },
+    "url": `${baseUrl}/game-details/${gameId}`,
+    "image": game.image,
+    "screenshot": game.image,
+    "playMode": "SinglePlayer",
+    "accessMode": "visual",
+    "accessibilityFeature": ["keyboard"],
+    "interactionType": "realTime"
   };
 }
 
@@ -354,5 +387,19 @@ A: Yes, all our games are completely free to play.`,
     embedPath: currentGame.gameUrl.startsWith('/embed/') ? currentGame.gameUrl : '/embed/default/index.html'
   };
 
-  return <GameDetailsClient game={currentGame} content={content} />;
+  // Generate structured data for SEO
+  const structuredData = generateGameStructuredData(currentGame, gameId);
+
+  return (
+    <>
+      {/* Add structured data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+      <GameDetailsClient game={currentGame} content={content} />
+    </>
+  );
 }

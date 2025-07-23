@@ -186,16 +186,14 @@ const GamePlayer = () => {
             
             <div className="flex items-center justify-center space-x-4 md:space-x-6 text-sm">
               <div className="flex items-center space-x-1">
-                <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                <span className="text-gray-300">4.8</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <Users className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-400">2.1M players</span>
-              </div>
-              <div className="flex items-center space-x-1">
                 <Gamepad2 className="w-4 h-4 text-blue-400" />
-                <span className="text-gray-400">Racing</span>
+                <span className="text-gray-400">Racing Game</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <span className="text-gray-400">• Free to Play</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <span className="text-gray-400">• No Download Required</span>
               </div>
             </div>
           </div>

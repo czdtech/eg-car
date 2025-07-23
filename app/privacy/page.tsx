@@ -1,8 +1,20 @@
-'use client';
-
+import { Metadata } from 'next';
 import { Shield } from 'lucide-react';
 import GameNavigation from '@/components/layout/game-navigation';
 import GameFooter from '@/components/layout/game-footer';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy - Eggy Car Unblocked Games',
+  description: 'Read our privacy policy to understand how we collect, use, and protect your information when playing our free HTML5 games.',
+  keywords: 'privacy policy, data protection, eggy car games, online privacy, gaming privacy',
+  authors: [{ name: 'Eggy Car Unblocked Portal' }],
+  robots: 'index, follow',
+  openGraph: {
+    title: 'Privacy Policy - Eggy Car Unblocked Games',
+    description: 'Our commitment to protecting your privacy while enjoying free online games.',
+    type: 'website',
+  },
+};
 
 export default function PrivacyPage() {
   return (

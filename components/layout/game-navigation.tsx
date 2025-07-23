@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { Play, Search, Menu, X } from 'lucide-react';
 
 const GameNavigation = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('game-section');
-  const [currentPath, setCurrentPath] = useState('/');
 
   const navigationItems = [
     { href: '/', label: 'Eggy Car', id: 'home', type: 'page' },
@@ -18,11 +20,8 @@ const GameNavigation = () => {
     // { href: '#games-grid', label: 'More Games', id: 'games-grid' }
   ];
 
-  // Track current path and active section
+  // Track active section
   useEffect(() => {
-    // Update current path
-    setCurrentPath(window.location.pathname);
-
     const observerOptions = {
       root: null,
       rootMargin: '-100px 0px -70% 0px', // Top margin accounts for fixed navigation
@@ -55,9 +54,9 @@ const GameNavigation = () => {
   // Helper function to determine if a navigation item is active
   const isItemActive = (item: any) => {
     if (item.type === 'page') {
-      return currentPath === item.href;
+      return pathname === item.href;
     } else {
-      return activeSection === item.id && currentPath === '/';
+      return activeSection === item.id && pathname === '/';
     }
   };
 
@@ -65,8 +64,8 @@ const GameNavigation = () => {
     setIsMenuOpen(false);
 
     if (type === 'page') {
-      // Navigate to different page
-      window.location.href = href;
+      // Navigate to different page using Next.js router
+      router.push(href);
     } else {
       // Smooth scroll to section on current page with navigation offset
       const element = document.querySelector(href);

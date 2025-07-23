@@ -114,19 +114,13 @@ export default function GameDetailsClient({ game, content }: GameDetailsClientPr
           </button>
         </div>
         
-        {/* Game Title and Rating */}
+        {/* Game Title and Info */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
           <h1 className="text-3xl font-bold">{game.title}</h1>
           <div className="flex items-center space-x-4 text-sm text-gray-400">
-            <div className="flex items-center space-x-1">
-              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-              <span>{game.rating}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Users className="w-4 h-4" />
-              <span>{game.players} players</span>
-            </div>
             <span className="px-2 py-1 bg-slate-700 rounded text-xs">{game.category}</span>
+            <span className="px-2 py-1 bg-blue-700 rounded text-xs">Free to Play</span>
+            <span className="px-2 py-1 bg-green-700 rounded text-xs">HTML5</span>
           </div>
         </div>
 
@@ -166,7 +160,7 @@ export default function GameDetailsClient({ game, content }: GameDetailsClientPr
                 <div className={`w-full h-32 bg-gradient-to-br ${recommendedGame.gradient} rounded-lg mb-3 relative overflow-hidden`}>
                   <Image
                     src={recommendedGame.image}
-                    alt={recommendedGame.title}
+                    alt={`${recommendedGame.title} - Free unblocked ${recommendedGame.category.toLowerCase()} game`}
                     fill
                     className="object-cover rounded-lg"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
@@ -201,14 +195,8 @@ export default function GameDetailsClient({ game, content }: GameDetailsClientPr
                     {recommendedGame.description}
                   </p>
                   <div className="flex items-center justify-between text-xs text-gray-500">
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                      <span>{recommendedGame.rating}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Users className="w-3 h-3" />
-                      <span>{recommendedGame.players}</span>
-                    </div>
+                    <span className="px-1 py-0.5 bg-slate-600 rounded text-xs">{recommendedGame.category}</span>
+                    <span className="text-green-400">Free to Play</span>
                   </div>
                 </div>
               </div>
