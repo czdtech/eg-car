@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { featuredGames } from '@/lib/game-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://eggycar.com'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://eggycaronline.org'
   
   // 基础页面
   const routes = [

@@ -127,7 +127,7 @@ export default function TermsPage() {
               <p className="text-gray-400">
                 For questions about these Terms, contact us at:
                 <br />
-                <a href="mailto:legal@eggycar.com" className="text-green-400 hover:underline">legal@eggycar.com</a>
+                <a href="mailto:legal@eggycaronline.org" className="text-green-400 hover:underline">legal@eggycaronline.org</a>
               </p>
             </div>
           </div>
